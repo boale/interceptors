@@ -38,18 +38,14 @@ export class ProfilerInterceptor implements HttpInterceptor {
     let execStatus: string;
 
     return next.handle(req).pipe(
-      tap(
-        // Succeeds when there is a response; ignore other events
-        (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            execStatus = 'succeeded';
-          }
-        },
-        // Operation failed; error is an HttpErrorResponse
-        _ => (execStatus = 'failed'),
+      tap((event: HttpEvent<any>) => { // Succeeds when there is a response; ignore other events
+        if (event instanceof HttpResponse) {
+          execStatus = 'succeeded';
+        }
+      },
+        _ => (execStatus = 'failed'), // Operation failed; error is an HttpErrorResponse
       ),
-      // Log when response observable either completes or errors
-      finalize(() => {
+      finalize(() => { // Log when response observable either completes or errors
         const elapsed = Date.now() - started;
         const msg = ` ${ req.method } "${ req.urlWithParams }" ${ execStatus } in ${ elapsed } ms.`;
 
