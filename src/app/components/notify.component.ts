@@ -16,11 +16,7 @@ export class NotifyComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    const body = {
-      title: 'foo',
-      body: 'bar',
-      userId: 1,
-    };
+    const body = { title: 'foo', body: 'bar',  userId: 1 };
     const url = 'https://jsonplaceholder.typicode.com/posts';
     this.response = this.http.post(url, body);
   }
