@@ -10,12 +10,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, filter, finalize, switchMap, take } from 'rxjs/operators';
 
-import { paths } from '../const';
+// import { paths } from '../const';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private AUTH_HEADER = 'Authorization';
-  private domainMatchRegExp: RegExp = /www.mydomain.com\//;
+  // private domainMatchRegExp: RegExp = /www.mydomain.com\//;
   private token = 'verySecretToken';
 
   private refreshTokenInProgress = false;
@@ -25,9 +25,9 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.auth)) {
-      return next.handle(req);
-    }
+    // if (!req.url.includes(paths.auth)) {
+    //   return next.handle(req);
+    // }
 
     console.warn('AuthInterceptor');
 
@@ -83,7 +83,11 @@ export class AuthInterceptor implements HttpInterceptor {
     // If we do not have a token yet then we should not set the header.
     // or
     // If you are calling an outside domain then do not add the token.
-    if (!(this.token && request.url.match(this.domainMatchRegExp))) {
+    // if (!(this.token && request.url.match(this.domainMatchRegExp))) {
+    //   return request;
+    // }
+
+    if (!(this.token && request.url.includes(`https://jsonplaceholder.typicode.com/todos/5`))) {
       return request;
     }
 

@@ -5,3 +5,7 @@ mat-grid-tile {
 .selected {
   background-color: blueviolet;
 }
+
+a {
+  color: white;
+}
