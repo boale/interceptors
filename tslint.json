@@ -1,0 +1,184 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "array-type": [
+      true,
+      "array"
+    ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "arrow-return-shorthand": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "component-class-suffix": true,
+    "contextual-decorator": true,
+    "curly": true,
+    "deprecation": {
+      "severity": "warn"
+    },
+    "directive-class-suffix": true,
+    "eofline": true,
+    "import-blacklist": [
+      true,
+      "rxjs/Rx"
+    ],
+    "import-destructuring-spacing": true,
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "max-line-length": [
+      true,
+      140
+    ],
+    "member-access": false,
+    "newline-before-return": true,
+    "no-consecutive-blank-lines": [
+      true,
+      1
+    ],
+    "no-console": [
+      true,
+      "log",
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-duplicate-imports": true,
+    "no-dynamic-delete": true,
+    "no-empty": false,
+    "no-host-metadata-property": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
+    "no-input-rename": true,
+    "no-inputs-metadata-property": true,
+    "no-non-null-assertion": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "no-outputs-metadata-property": true,
+    "no-redundant-jsdoc": false,
+    "no-sparse-arrays": true,
+    "no-switch-case-fall-through": true,
+    "no-var-requires": false,
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
+    "object-literal-shorthand": true,
+    "object-literal-sort-keys": false,
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-whitespace",
+      "check-else",
+      "check-catch",
+      "check-finally"
+    ],
+    "ordered-imports": [
+      true,
+      {
+        "grouped-imports": true,
+        "groups": [
+          {
+            "match": "^@angular/*",
+            "name": "angular",
+            "order": 10
+          },
+          {
+            "match": "^@ngrx/*",
+            "name": "redux store",
+            "order": 20
+          },
+          {
+            "match": "^[a-z]",
+            "name": "other third parties",
+            "order": 30
+          },
+          {
+            "match": "^@env.*",
+            "name": "@env/*",
+            "order": 40
+          },
+          {
+            "match": "^@api.*",
+            "name": "@api/*",
+            "order": 50
+          },
+          {
+            "match": "^@models.*",
+            "name": "@models.*",
+            "order": 60
+          },
+          {
+            "match": "^@app.*",
+            "name": "@app/*",
+            "order": 70
+          },
+          {
+            "match": "^@.*",
+            "name": "other internal modules",
+            "order": 80
+          },
+          {
+            "match": "^[.].*",
+            "name": "relative dir",
+            "order": 90
+          }
+        ],
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "case-insensitive"
+      }
+    ],
+    "prefer-conditional-expression": [
+      true,
+      "check-else-if"
+    ],
+    "prefer-object-spread": true,
+    "prefer-template": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "space-within-parens": [
+      true,
+      0
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "typedef": [
+      true,
+      "parameter"
+    ],
+    "use-life-cycle-interface": true,
+    "use-pipe-decorator": true,
+    "use-pipe-transform-interface": true,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-rest-spread",
+      "check-type",
+      "check-type-operator"
+    ]
+  },
+  "rulesDirectory": [
+    "codelyzer"
+  ]
+}
