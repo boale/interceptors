@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { LoaderService } from "../services/loader.service";
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+import { LoaderService } from '../services/loader.service';
+import {take, tap} from "rxjs/operators";
 
 @Component({
-  styleUrls: ["loader.component.css"],
+  styleUrls: ['loader.component.css'],
   template: `
     <div>
       <button
@@ -11,24 +13,29 @@ import { LoaderService } from "../services/loader.service";
         color="primary"
         (click)="run()"
         [disabled]="loaderService.showLoader"
-      >
-        Run
-      </button>
+      >Run</button>
+
       <div>
         <h3>Response</h3>
         <pre>{{ response | json }}</pre>
         <div *ngIf="loaderService.showLoader" class="loader"></div>
       </div>
     </div>
-  `
+  `,
 })
 export class LoaderComponent {
   response;
 
-  constructor(private http: HttpClient, public loaderService: LoaderService) {}
+  constructor(
+    private http: HttpClient,
+    public loaderService: LoaderService,
+  ) {}
 
   run() {
-    const url = "https://jsonplaceholder.typicode.com/albums/1";
-    this.http.get(url).subscribe(r => (this.response = r));
+    const url = 'https://jsonplaceholder.typicode.com/albums/1';
+    this.http.get(url).pipe(
+      tap(r => (this.response = r)),
+      take(1),
+    ).subscribe();
   }
 }

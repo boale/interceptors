@@ -1,15 +1,17 @@
-import { Injectable } from "@angular/core";
 import {
   HttpEvent,
-  HttpRequest,
   HttpHandler,
   HttpInterceptor,
-  HttpResponse
-} from "@angular/common/http";
-import { Observable } from "rxjs";
-import { tap, finalize } from "rxjs/operators";
-import { ProfilerService } from "../services/profiler.service";
-import { paths } from "../const";
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
+
+import { paths } from '../const';
+import { ProfilerService } from '../services/profiler.service';
 
 @Injectable()
 export class ProfilerInterceptor implements HttpInterceptor {
@@ -17,34 +19,42 @@ export class ProfilerInterceptor implements HttpInterceptor {
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.profiler) && !req.url.includes("users")) {
+    if (!req.url.includes(paths.profiler) && !req.url.includes('users')) {
       return next.handle(req);
     }
-    console.warn("ProfilerInterceptor");
 
+    console.warn('ProfilerInterceptor');
+
+    return this.addRequestProfileLog(req, next);
+  }
+
+  private addRequestProfileLog(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const started = Date.now();
-    let ok: string;
+    let execStatus: string;
 
     return next.handle(req).pipe(
       tap(
         // Succeeds when there is a response; ignore other events
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            ok = "succeeded";
+            execStatus = 'succeeded';
           }
         },
         // Operation failed; error is an HttpErrorResponse
-        error => (ok = "failed")
+        _ => (execStatus = 'failed'),
       ),
       // Log when response observable either completes or errors
       finalize(() => {
         const elapsed = Date.now() - started;
-        const msg = `${req.method} "${req.urlWithParams}"
-               ${ok} in ${elapsed} ms.`;
+        const msg = ` ${ req.method } "${ req.urlWithParams }" ${ execStatus } in ${ elapsed } ms.`;
+
         this.profiler.add(msg);
-      })
+      }),
     );
   }
 }

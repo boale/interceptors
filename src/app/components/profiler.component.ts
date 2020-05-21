@@ -1,17 +1,17 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { paths } from "../const";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { paths } from '../const';
 
 @Component({
   template: `
     <h3>Response</h3>
     <pre>{{ response | async | json }}</pre>
-    <button mat-raised-button color="primary" (click)="succeed()">
-      Succeed
-    </button>
+    <button mat-raised-button color="primary" (click)="succeed()">Succeed</button>
     <button mat-raised-button color="warn" (click)="fail()">Fail</button>
-  `
+  `,
 })
 export class ProfilerComponent {
   response: Observable<any>;
@@ -19,7 +19,7 @@ export class ProfilerComponent {
   constructor(private http: HttpClient) {}
 
   succeed() {
-    const url = "https://jsonplaceholder.typicode.com/users/1";
+    const url = 'https://jsonplaceholder.typicode.com/users/1';
     this.response = this.http.get(url);
   }
 

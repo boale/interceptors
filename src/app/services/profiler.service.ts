@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class ProfilerService {
   add(log: string) {
-    console.log(log);
+    // tslint:disable-next-line:no-console
+    console.info(log);
   }
 }

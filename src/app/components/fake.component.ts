@@ -1,16 +1,16 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { paths } from "../const";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { paths } from '../const';
 
 @Component({
   template: `
     <h3>Response</h3>
     <pre>{{ response | async | json }}</pre>
-    <button mat-raised-button color="primary" (click)="run()">
-      Run
-    </button>
-  `
+    <button mat-raised-button color="primary" (click)="run()">Run</button>
+  `,
 })
 export class FakeComponent {
   response: Observable<any>;

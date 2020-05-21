@@ -1,33 +1,38 @@
-import { Injectable, Injector } from "@angular/core";
 import {
   HttpEvent,
-  HttpRequest,
   HttpHandler,
-  HttpInterceptor
-} from "@angular/common/http";
-import { Observable } from "rxjs";
-import { finalize, delay } from "rxjs/operators";
-import { LoaderService } from "../services/loader.service";
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { delay, finalize } from 'rxjs/operators';
+
+import { LoaderService } from '../services/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+
+  constructor(
+    private loader: LoaderService,
+  ) {}
+
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("albums")) {
+    if (!req.url.includes('albums')) {
       return next.handle(req);
     }
-    console.warn("LoaderInterceptor");
 
-    const loaderService = this.injector.get(LoaderService);
+    console.warn('LoaderInterceptor');
 
-    loaderService.show();
+    this.loader.show();
 
     return next.handle(req).pipe(
-      delay(3000),
-      finalize(() => loaderService.hide())
+      delay(1000),
+      finalize(() => this.loader.hide()),
     );
   }
 }
