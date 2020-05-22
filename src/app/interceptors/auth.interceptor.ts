@@ -8,7 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, filter, finalize, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, finalize, map, switchMap, take } from 'rxjs/operators';
 
 // import { paths } from '../const';
 
@@ -45,12 +45,13 @@ export class AuthInterceptor implements HttpInterceptor {
           return throwError(error);
         }
 
-        // 401 errors are most likely going to be because we have an expired token that we need to refresh.
+        // 401 errors are most likely going to be
+        // because we have an expired token that we need to refresh.
         if (this.refreshTokenInProgress) {
           // If refreshTokenInProgress is true, we will wait until refreshTokenSubject has a non-null value
           // which means the new token is ready and we can retry the request again
           return this.refreshToken$$.pipe(
-            filter(result => result !== null),
+            filter(Boolean),
             take(1),
             switchMap(() => next.handle(this.addAuthenticationToken(req))),
           );
@@ -74,8 +75,8 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 
-  private refreshAccessToken(): Observable<any> {
-    return of('secret token');
+  private refreshAccessToken(): Observable<boolean> {
+    return of('refresh a secret token').pipe(map(() => true));
   }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
@@ -87,6 +88,7 @@ export class AuthInterceptor implements HttpInterceptor {
     //   return request;
     // }
 
+    // Check if requested URL needs adding a token
     if (!(this.token && request.url.includes(`https://jsonplaceholder.typicode.com/todos/5`))) {
       return request;
     }
