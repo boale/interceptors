@@ -4,5 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SessionService {
-  readOnly = Math.random() >= 0.5;
+  get readOnly(): boolean {
+    return Math.random() >= 0.5;
+  }
 }
