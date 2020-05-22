@@ -10,6 +10,7 @@ import { HeaderInterceptor } from './header.interceptor';
 import { HttpsInterceptor } from './https.interceptor';
 import { LoaderInterceptor } from './loader.interceptor';
 import { NotifyInterceptor } from './notify.interptor';
+import { ParamsInterceptor } from './params.interceptor';
 import { ProfilerInterceptor } from './profiler.interceptor';
 import { ReadOnlyInterceptor } from './read-only.interceptor';
 
@@ -26,4 +27,5 @@ export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ParamsInterceptor, multi: true },
 ];
