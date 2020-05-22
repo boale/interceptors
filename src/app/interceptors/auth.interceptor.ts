@@ -58,7 +58,8 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         this.refreshTokenInProgress = true;
-        // Set the refreshTokenSubject to null so that subsequent API calls will wait until the new token has been retrieved
+        // Set the refreshTokenSubject to null
+        // so that subsequent API calls will wait until the new token has been retrieved
         this.refreshToken$$.next(null);
 
         return this.refreshAccessToken().pipe(
