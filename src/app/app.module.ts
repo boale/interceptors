@@ -9,10 +9,14 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BusyComponent } from './components/busy.component';
 import { httpInterceptorProviders } from './interceptors';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    BusyComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
