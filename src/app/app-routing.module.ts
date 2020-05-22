@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header.component';
 import { HttpsComponent } from './components/https.component';
 import { LoaderComponent } from './components/loader.component';
 import { NotifyComponent } from './components/notify.component';
+import { ParamsComponent } from './components/params.component';
 import { ProfilerComponent } from './components/profiler.component';
 import { paths } from './const';
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: paths.loader, component: LoaderComponent },
   { path: paths.profiler, component: ProfilerComponent },
   { path: paths.notify, component: NotifyComponent },
+  { path: paths.params, component: ParamsComponent },
 ];
 
 @NgModule({
@@ -40,6 +42,7 @@ const routes: Routes = [
     LoaderComponent,
     NotifyComponent,
     ProfilerComponent,
+    ParamsComponent,
   ],
   imports: [
     CommonModule,

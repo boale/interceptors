@@ -26,6 +26,6 @@ export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: ProfilerInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: ParamsInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
 ];

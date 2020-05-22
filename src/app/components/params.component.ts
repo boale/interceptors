@@ -3,17 +3,15 @@ import { Component } from '@angular/core';
 
 import { take } from 'rxjs/operators';
 
-import { paths } from '../const';
-
 @Component({
   template: `
     <button mat-raised-button color="primary" (click)="run()">Run</button>
   `,
 })
-export class HeaderComponent {
+export class ParamsComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get(paths.header).pipe(take(1)).subscribe();
+    this.http.get('https://jsonplaceholder.typicode.com/comments/1').pipe(take(1)).subscribe();
   }
 }

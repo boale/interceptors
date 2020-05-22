@@ -1,13 +1,16 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import {Observable, throwError} from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { LoggerService } from '@app/services/logger.service';
 import { SessionService } from '@app/services/session.service';
 
 export function isReadOnlyModeIgnoredForRequest(req: HttpRequest<any>): boolean {
-  return req.method === 'POST' && req.url.includes('apiUrlWhereDataIsTakenWithPostRequest');
+  const isPostGetRequest = req.method === 'POST' && req.url.includes('apiUrlWhereDataIsTakenWithPostRequest');
+  const isIgnoredUrl = req.url.includes('https://jsonplaceholder.typicode.com/comments/1');
+
+  return isPostGetRequest || isIgnoredUrl;
 }
 
 @Injectable()

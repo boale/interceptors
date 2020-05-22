@@ -9,4 +9,5 @@ export const paths = {
   convert: 'convert',
   loader: 'loader',
   https: 'https',
+  params: 'params',
 };
